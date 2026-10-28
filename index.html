@@ -3,121 +3,147 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>IoT Teacher Feedback Form</title>
+  <title>IoT Course & Faculty Evaluation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
       --primary: #0f766e;
-      --primary-hover: #115e59;
-      --accent: #14b8a6;
-      --bg-surface: #ffffff;
-      --bg-body: #f1f5f9;
-      --text-main: #1e293b;
+      --primary-light: #14b8a6;
+      --primary-subtle: #f0fdfa;
+      --surface: #ffffff;
+      --bg: #f8fafc;
+      --border: #e2e8f0;
+      --text-main: #0f172a;
       --text-muted: #64748b;
-      --border: #cbd5e1;
-      --radius: 8px;
+      --radius: 12px;
+      --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.07), 0 2px 4px -2px rgb(0 0 0 / 0.05);
+      --shadow-lg: 0 20px 25px -5px rgb(0 0 0 / 0.08), 0 8px 10px -6px rgb(0 0 0 / 0.04);
     }
 
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     }
 
     body {
-      background-color: var(--bg-body);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: var(--bg);
       color: var(--text-main);
-      display: flex;
-      justify-content: center;
+      line-height: 1.6;
       padding: 40px 16px;
     }
 
-    .form-wrapper {
-      max-width: 680px;
-      width: 100%;
-      background: var(--bg-surface);
-      border-radius: var(--radius);
-      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
-      border: 1px solid #e2e8f0;
-      overflow: hidden;
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
     }
 
-    .header {
-      background: linear-gradient(135deg, #042f2e, #0f766e);
+    /* Header Banner */
+    .header-card {
+      background: linear-gradient(135deg, #042f2e 0%, #0f766e 100%);
       color: #ffffff;
-      padding: 32px 24px;
-      text-align: center;
+      padding: 36px 32px;
+      border-radius: var(--radius);
+      margin-bottom: 24px;
+      box-shadow: var(--shadow);
     }
 
-    .header h1 {
-      font-size: 1.6rem;
-      font-weight: 700;
-      margin-bottom: 6px;
-      letter-spacing: -0.02em;
-    }
-
-    .header p {
-      font-size: 0.95rem;
+    .badge {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.15);
       color: #ccfbf1;
-      line-height: 1.4;
+      padding: 4px 12px;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
     }
 
-    form {
-      padding: 28px 24px;
+    .header-card h1 {
+      font-size: 1.75rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .header-card p {
+      color: #99f6e4;
+      font-size: 0.95rem;
+    }
+
+    /* Form Container */
+    .form-card {
+      background: var(--surface);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-lg);
+      padding: 32px;
+      margin-bottom: 24px;
     }
 
     .section-title {
       font-size: 1.15rem;
-      font-weight: 600;
-      color: var(--primary);
-      border-bottom: 2px solid #e2e8f0;
+      font-weight: 700;
+      color: var(--text-main);
+      border-bottom: 2px solid var(--primary-subtle);
       padding-bottom: 8px;
-      margin-top: 24px;
-      margin-bottom: 18px;
+      margin: 28px 0 20px;
     }
 
     .section-title:first-of-type {
       margin-top: 0;
     }
 
-    .field {
-      margin-bottom: 18px;
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
     }
 
-    label {
+    @media (max-width: 600px) {
+      .grid-2 {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .input-group {
+      margin-bottom: 20px;
+    }
+
+    .input-group label {
       display: block;
-      font-size: 0.9rem;
-      font-weight: 500;
-      margin-bottom: 6px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      margin-bottom: 8px;
       color: var(--text-main);
     }
 
-    .req {
+    .required {
       color: #e11d48;
-      margin-left: 2px;
     }
 
     input[type="text"],
     input[type="date"],
-    select,
     textarea {
       width: 100%;
-      padding: 10px 12px;
-      font-size: 0.95rem;
+      padding: 10px 14px;
       border: 1px solid var(--border);
-      border-radius: var(--radius);
-      outline: none;
-      background-color: #fff;
-      color: var(--text-main);
-      transition: border-color 0.15s ease, box-shadow 0.15s ease;
+      border-radius: 8px;
+      font-family: inherit;
+      font-size: 0.925rem;
+      background: #ffffff;
+      transition: all 0.2s ease;
     }
 
-    input[type="text"]:focus,
-    input[type="date"]:focus,
-    select:focus,
+    input:focus,
     textarea:focus {
-      border-color: var(--accent);
-      box-shadow: 0 0 0 3px rgba(20, 184, 166, 0.15);
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.15);
     }
 
     textarea {
@@ -125,255 +151,344 @@
       min-height: 80px;
     }
 
-    .radio-group {
+    /* Interactive Rating Chips */
+    .chips-group {
       display: flex;
       flex-wrap: wrap;
-      gap: 16px;
-      padding-top: 4px;
+      gap: 8px;
     }
 
-    .radio-label {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 0.9rem;
-      font-weight: normal;
+    .chip {
+      position: relative;
+    }
+
+    .chip input[type="radio"] {
+      position: absolute;
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .chip label {
+      display: inline-block;
+      padding: 8px 16px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--text-muted);
       cursor: pointer;
-      margin-bottom: 0;
+      background: var(--surface);
+      transition: all 0.2s ease;
+      user-select: none;
     }
 
-    .checkbox-field {
+    .chip label:hover {
+      border-color: var(--primary-light);
+      background: var(--primary-subtle);
+      color: var(--primary);
+    }
+
+    .chip input[type="radio"]:checked + label {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: #ffffff;
+      font-weight: 600;
+    }
+
+    /* Confirmation Checkbox */
+    .consent-box {
       display: flex;
       align-items: flex-start;
-      gap: 10px;
-      margin: 24px 0 20px 0;
-      padding-top: 12px;
-      border-top: 1px solid #f1f5f9;
-    }
-
-    .checkbox-field input {
-      margin-top: 3px;
-    }
-
-    .button-group {
-      display: flex;
       gap: 12px;
-      margin-top: 10px;
+      background: var(--primary-subtle);
+      border: 1px solid #ccfbf1;
+      padding: 14px;
+      border-radius: 8px;
+      margin: 24px 0;
+      cursor: pointer;
+    }
+
+    .consent-box input {
+      margin-top: 3px;
+      accent-color: var(--primary);
+      width: 16px;
+      height: 16px;
+    }
+
+    .consent-box span {
+      font-size: 0.875rem;
+      color: #134e4a;
+    }
+
+    /* Actions */
+    .actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 12px;
     }
 
     .btn {
-      flex: 1;
-      padding: 11px 16px;
+      padding: 12px 24px;
       font-size: 0.95rem;
       font-weight: 600;
+      border-radius: 8px;
       border: none;
-      border-radius: var(--radius);
       cursor: pointer;
-      transition: background-color 0.15s ease, opacity 0.15s ease;
+      transition: all 0.2s ease;
+      font-family: inherit;
     }
 
-    .btn-submit {
-      background-color: var(--primary);
-      color: #ffffff;
-    }
-
-    .btn-submit:hover {
-      background-color: var(--primary-hover);
-    }
-
-    .btn-reset {
-      background-color: #f1f5f9;
+    .btn-secondary {
+      background: transparent;
       color: var(--text-muted);
       border: 1px solid var(--border);
     }
 
-    .btn-reset:hover {
-      background-color: #e2e8f0;
+    .btn-secondary:hover {
+      background: #f1f5f9;
       color: var(--text-main);
     }
 
-    .footer {
+    .btn-primary {
+      background: var(--primary);
+      color: #ffffff;
+    }
+
+    .btn-primary:hover {
+      background: #0d9488;
+      box-shadow: 0 4px 12px rgba(13, 148, 136, 0.25);
+    }
+
+    /* Success Card State */
+    .success-card {
+      display: none;
       text-align: center;
-      padding: 16px;
-      background: #fafafa;
-      border-top: 1px solid #f1f5f9;
-      font-size: 0.8rem;
+      background: var(--surface);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-lg);
+      padding: 48px 32px;
+    }
+
+    .success-icon {
+      width: 64px;
+      height: 64px;
+      background: #dcfce7;
+      color: #16a34a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      margin: 0 auto 20px;
+      font-size: 2rem;
+    }
+
+    .success-card h2 {
+      font-size: 1.5rem;
+      color: var(--text-main);
+      margin-bottom: 8px;
+    }
+
+    .success-card p {
       color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-bottom: 24px;
+    }
+
+    .reference-box {
+      background: var(--bg);
+      border: 1px dashed var(--border);
+      padding: 12px;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+      display: inline-block;
     }
   </style>
 </head>
 <body>
 
-  <div class="form-wrapper">
-    <div class="header">
-      <h1>Teacher Feedback Form</h1>
-      <p>Internet of Things (IoT) Subject</p>
-      <p style="font-size: 0.85rem; opacity: 0.9; margin-top: 4px;">Your feedback helps improve teaching quality.</p>
+  <div class="container">
+    <div class="header-card">
+      <span class="badge">Academic Assessment</span>
+      <h1>IoT Course & Instructor Review</h1>
+      <p>Your constructive feedback guides future curriculum iterations and strengthens hands-on laboratory delivery.</p>
     </div>
 
-    <form>
-      <!-- Student Details -->
-      <h2 class="section-title">Student Details</h2>
-
-      <div class="field">
-        <label for="studentName">Student Name<span class="req">*</span></label>
-        <input type="text" id="studentName" placeholder="Enter your name" required>
-      </div>
-
-      <div class="field">
-        <label for="rollNumber">Roll Number<span class="req">*</span></label>
-        <input type="text" id="rollNumber" placeholder="Enter roll number" required>
-      </div>
-
-      <div class="field">
-        <label for="teacherName">Teacher's Name<span class="req">*</span></label>
-        <input type="text" id="teacherName" placeholder="Enter teacher's name" required>
-      </div>
-
-      <div class="field">
-        <label for="feedbackDate">Feedback Date<span class="req">*</span></label>
-        <input type="date" id="feedbackDate" required>
-      </div>
-
-      <!-- Teacher Evaluation -->
-      <h2 class="section-title">Teacher Evaluation</h2>
-
-      <div class="field">
-        <label for="q1">1. How clearly does the teacher explain IoT concepts?<span class="req">*</span></label>
-        <select id="q1" required>
-          <option value="" disabled selected>Select rating</option>
-          <option value="Excellent">Excellent</option>
-          <option value="Very Good">Very Good</option>
-          <option value="Good">Good</option>
-          <option value="Average">Average</option>
-          <option value="Poor">Poor</option>
-        </select>
-      </div>
-
-      <div class="field">
-        <label for="q2">2. How knowledgeable is the teacher about IoT?<span class="req">*</span></label>
-        <select id="q2" required>
-          <option value="" disabled selected>Select rating</option>
-          <option value="Excellent">Excellent</option>
-          <option value="Very Good">Very Good</option>
-          <option value="Good">Good</option>
-          <option value="Average">Average</option>
-          <option value="Poor">Poor</option>
-        </select>
-      </div>
-
-      <div class="field">
-        <label>3. Does the teacher use practical examples?<span class="req">*</span></label>
-        <div class="radio-group">
-          <label class="radio-label"><input type="radio" name="practical" value="Always" required> Always</label>
-          <label class="radio-label"><input type="radio" name="practical" value="Often"> Often</label>
-          <label class="radio-label"><input type="radio" name="practical" value="Sometimes"> Sometimes</label>
-          <label class="radio-label"><input type="radio" name="practical" value="Rarely"> Rarely</label>
+    <!-- Feedback Form -->
+    <form id="evaluationForm" class="form-card">
+      <h2 class="section-title">Session & Participant Details</h2>
+      
+      <div class="grid-2">
+        <div class="input-group">
+          <label for="studentName">Student Full Name <span class="required">*</span></label>
+          <input type="text" id="studentName" placeholder="e.g., Alex Johnson" required>
+        </div>
+        <div class="input-group">
+          <label for="enrollmentId">Enrollment / Roll ID <span class="required">*</span></label>
+          <input type="text" id="enrollmentId" placeholder="e.g., IOT-2026-081" required>
         </div>
       </div>
 
-      <div class="field">
-        <label for="q4">4. Is the teacher available to solve doubts?<span class="req">*</span></label>
-        <select id="q4" required>
-          <option value="" disabled selected>Select rating</option>
-          <option value="Always">Always</option>
-          <option value="Most of the time">Most of the time</option>
-          <option value="Sometimes">Sometimes</option>
-          <option value="Rarely">Rarely</option>
-        </select>
-      </div>
-
-      <div class="field">
-        <label for="q5">5. Rate the teacher's communication skills.<span class="req">*</span></label>
-        <select id="q5" required>
-          <option value="" disabled selected>Select rating</option>
-          <option value="Excellent">Excellent</option>
-          <option value="Very Good">Very Good</option>
-          <option value="Good">Good</option>
-          <option value="Average">Average</option>
-          <option value="Poor">Poor</option>
-        </select>
-      </div>
-
-      <div class="field">
-        <label>6. Does the teacher encourage student participation?<span class="req">*</span></label>
-        <div class="radio-group">
-          <label class="radio-label"><input type="radio" name="participation" value="Yes" required> Yes</label>
-          <label class="radio-label"><input type="radio" name="participation" value="Sometimes"> Sometimes</label>
-          <label class="radio-label"><input type="radio" name="participation" value="No"> No</label>
+      <div class="grid-2">
+        <div class="input-group">
+          <label for="facultyName">Instructor Name <span class="required">*</span></label>
+          <input type="text" id="facultyName" placeholder="e.g., Dr. R. Verma" required>
+        </div>
+        <div class="input-group">
+          <label for="reviewDate">Date of Assessment <span class="required">*</span></label>
+          <input type="date" id="reviewDate" required>
         </div>
       </div>
 
-      <div class="field">
-        <label for="q7">7. Rate the IoT practical sessions.<span class="req">*</span></label>
-        <select id="q7" required>
-          <option value="" disabled selected>Select rating</option>
-          <option value="Excellent">Excellent</option>
-          <option value="Very Good">Very Good</option>
-          <option value="Good">Good</option>
-          <option value="Average">Average</option>
-          <option value="Poor">Poor</option>
-        </select>
-      </div>
+      <h2 class="section-title">Curriculum Delivery & Classroom Experience</h2>
 
-      <div class="field">
-        <label>8. Is the teacher punctual and regular?<span class="req">*</span></label>
-        <div class="radio-group">
-          <label class="radio-label"><input type="radio" name="punctual" value="Always" required> Always</label>
-          <label class="radio-label"><input type="radio" name="punctual" value="Usually"> Usually</label>
-          <label class="radio-label"><input type="radio" name="punctual" value="Sometimes"> Sometimes</label>
-          <label class="radio-label"><input type="radio" name="punctual" value="Rarely"> Rarely</label>
+      <div class="input-group">
+        <label>1. Clarity in explaining complex IoT architecture, sensors, and protocols <span class="required">*</span></label>
+        <div class="chips-group">
+          <div class="chip"><input type="radio" name="clarity" id="c5" value="Exceptional" required><label for="c5">Exceptional</label></div>
+          <div class="chip"><input type="radio" name="clarity" id="c4" value="Proficient"><label for="c4">Proficient</label></div>
+          <div class="chip"><input type="radio" name="clarity" id="c3" value="Competent"><label for="c3">Competent</label></div>
+          <div class="chip"><input type="radio" name="clarity" id="c2" value="Developing"><label for="c2">Developing</label></div>
+          <div class="chip"><input type="radio" name="clarity" id="c1" value="Unsatisfactory"><label for="c1">Unsatisfactory</label></div>
         </div>
       </div>
 
-      <div class="field">
-        <label>9. Does the teacher complete the syllabus on time?<span class="req">*</span></label>
-        <div class="radio-group">
-          <label class="radio-label"><input type="radio" name="syllabus" value="Yes" required> Yes</label>
-          <label class="radio-label"><input type="radio" name="syllabus" value="Partially"> Partially</label>
-          <label class="radio-label"><input type="radio" name="syllabus" value="No"> No</label>
+      <div class="input-group">
+        <label>2. Depth of technical expertise and industry relevance <span class="required">*</span></label>
+        <div class="chips-group">
+          <div class="chip"><input type="radio" name="knowledge" id="k5" value="Advanced" required><label for="k5">Advanced</label></div>
+          <div class="chip"><input type="radio" name="knowledge" id="k4" value="Strong"><label for="k4">Strong</label></div>
+          <div class="chip"><input type="radio" name="knowledge" id="k3" value="Adequate"><label for="k3">Adequate</label></div>
+          <div class="chip"><input type="radio" name="knowledge" id="k2" value="Basic"><label for="k2">Basic</label></div>
         </div>
       </div>
 
-      <div class="field">
-        <label>10. Overall teacher rating<span class="req">*</span></label>
-        <div class="radio-group">
-          <label class="radio-label"><input type="radio" name="overall" value="Excellent" required> Excellent</label>
-          <label class="radio-label"><input type="radio" name="overall" value="Very Good"> Very Good</label>
-          <label class="radio-label"><input type="radio" name="overall" value="Good"> Good</label>
-          <label class="radio-label"><input type="radio" name="overall" value="Average"> Average</label>
-          <label class="radio-label"><input type="radio" name="overall" value="Poor"> Poor</label>
+      <div class="input-group">
+        <label>3. Integration of live demonstrations, embedded hardware, and real-world cases <span class="required">*</span></label>
+        <div class="chips-group">
+          <div class="chip"><input type="radio" name="practical_demo" id="p_always" value="Every Session" required><label for="p_always">Every Session</label></div>
+          <div class="chip"><input type="radio" name="practical_demo" id="p_frequent" value="Regularly"><label for="p_frequent">Regularly</label></div>
+          <div class="chip"><input type="radio" name="practical_demo" id="p_occasional" value="Occasionally"><label for="p_occasional">Occasionally</label></div>
+          <div class="chip"><input type="radio" name="practical_demo" id="p_rare" value="Rarely"><label for="p_rare">Rarely</label></div>
         </div>
       </div>
 
-      <!-- Additional Feedback -->
-      <h2 class="section-title">Additional Feedback</h2>
-
-      <div class="field">
-        <label for="q11">11. What do you like most about the teacher's teaching?</label>
-        <textarea id="q11" placeholder="Share your thoughts..."></textarea>
+      <div class="input-group">
+        <label>4. Instructor availability for troubleshooting and project mentorship <span class="required">*</span></label>
+        <div class="chips-group">
+          <div class="chip"><input type="radio" name="availability" id="a_high" value="Always Accessible" required><label for="a_high">Always Accessible</label></div>
+          <div class="chip"><input type="radio" name="availability" id="a_mod" value="Usually Available"><label for="a_mod">Usually Available</label></div>
+          <div class="chip"><input type="radio" name="availability" id="a_some" value="Limited Hours"><label for="a_some">Limited Hours</label></div>
+          <div class="chip"><input type="radio" name="availability" id="a_low" value="Hard to Reach"><label for="a_low">Hard to Reach</label></div>
+        </div>
       </div>
 
-      <div class="field">
-        <label for="q12">12. What improvements would you suggest?</label>
-        <textarea id="q12" placeholder="Write your suggestions..."></textarea>
+      <div class="input-group">
+        <label>5. Promotion of interactive questioning and lab engagement <span class="required">*</span></label>
+        <div class="chips-group">
+          <div class="chip"><input type="radio" name="engagement" id="e_high" value="High Encouragement" required><label for="e_high">High Encouragement</label></div>
+          <div class="chip"><input type="radio" name="engagement" id="e_mod" value="Moderate"><label for="e_mod">Moderate</label></div>
+          <div class="chip"><input type="radio" name="engagement" id="e_low" value="Minimal"><label for="e_low">Minimal</label></div>
+        </div>
       </div>
 
-      <div class="checkbox-field">
-        <input type="checkbox" id="confirm" required>
-        <label for="confirm" class="radio-label">I confirm that my feedback is honest and respectful.<span class="req">*</span></label>
+      <div class="input-group">
+        <label>6. Hands-on practical lab sessions quality <span class="required">*</span></label>
+        <div class="chips-group">
+          <div class="chip"><input type="radio" name="lab_quality" id="l5" value="Top Tier" required><label for="l5">Top Tier</label></div>
+          <div class="chip"><input type="radio" name="lab_quality" id="l4" value="Very Productive"><label for="l4">Very Productive</label></div>
+          <div class="chip"><input type="radio" name="lab_quality" id="l3" value="Standard"><label for="l3">Standard</label></div>
+          <div class="chip"><input type="radio" name="lab_quality" id="l2" value="Needs Equipment Upgrade"><label for="l2">Needs Work</label></div>
+        </div>
       </div>
 
-      <div class="button-group">
-        <button type="submit" class="btn btn-submit">Submit Feedback</button>
-        <button type="reset" class="btn btn-reset">Reset Form</button>
+      <div class="input-group">
+        <label>7. Adherence to timetable and regular syllabus progression <span class="required">*</span></label>
+        <div class="chips-group">
+          <div class="chip"><input type="radio" name="punctuality" id="pu_cons" value="Consistent & On Schedule" required><label for="pu_cons">Consistent & On Schedule</label></div>
+          <div class="chip"><input type="radio" name="punctuality" id="pu_most" value="Mostly On Track"><label for="pu_most">Mostly On Track</label></div>
+          <div class="chip"><input type="radio" name="punctuality" id="pu_lag" value="Frequent Delays"><label for="pu_lag">Frequent Delays</label></div>
+        </div>
+      </div>
+
+      <div class="input-group">
+        <label>8. Overall pedagogical score for this course <span class="required">*</span></label>
+        <div class="chips-group">
+          <div class="chip"><input type="radio" name="overall" id="ov5" value="5 - Outstanding" required><label for="ov5">5 - Outstanding</label></div>
+          <div class="chip"><input type="radio" name="overall" id="ov4" value="4 - Commendable"><label for="ov4">4 - Commendable</label></div>
+          <div class="chip"><input type="radio" name="overall" id="ov3" value="3 - Satisfactory"><label for="ov3">3 - Satisfactory</label></div>
+          <div class="chip"><input type="radio" name="overall" id="ov2" value="2 - Marginal"><label for="ov2">2 - Marginal</label></div>
+          <div class="chip"><input type="radio" name="overall" id="ov1" value="1 - Deficient"><label for="ov1">1 - Deficient</label></div>
+        </div>
+      </div>
+
+      <h2 class="section-title">Qualitative Observations</h2>
+
+      <div class="input-group">
+        <label for="strengths">What aspects of the instructor's methodology were most valuable?</label>
+        <textarea id="strengths" placeholder="e.g., Clear explanation of MQTT protocols, engaging breadboard debugging sessions..."></textarea>
+      </div>
+
+      <div class="input-group">
+        <label for="improvements">Actionable recommendations for upcoming batches</label>
+        <textarea id="improvements" placeholder="e.g., More focus on edge computing simulations, extended lab hours for final projects..."></textarea>
+      </div>
+
+      <label class="consent-box">
+        <input type="checkbox" id="integrityConsent" required>
+        <span>I verify that this review represents an objective, professional appraisal of my learning experience.</span>
+      </label>
+
+      <div class="actions">
+        <button type="reset" class="btn btn-secondary">Clear Entries</button>
+        <button type="submit" class="btn btn-primary">Transmit Assessment</button>
       </div>
     </form>
 
-    <div class="footer">
-      IoT Teacher Feedback System
+    <!-- Post-Submission Screen -->
+    <div id="successCard" class="success-card">
+      <div class="success-icon">✓</div>
+      <h2>Submission Received</h2>
+      <p>Thank you for contributing your perspective. Your evaluation has been archived successfully to support departmental teaching enhancements.</p>
+      <div class="reference-box">
+        Confirmation Reference: <strong id="submissionId">IOT-REV-00000</strong>
+      </div>
+      <div>
+        <button type="button" class="btn btn-primary" onclick="resetToNewForm()">Complete Another Evaluation</button>
+      </div>
     </div>
   </div>
 
+  <script>
+    // Autofill current date on load
+    document.getElementById('reviewDate').valueAsDate = new Date();
+
+    const form = document.getElementById('evaluationForm');
+    const successCard = document.getElementById('successCard');
+
+    form.addEventListener('submit', function (event) {
+      event.preventDefault();
+
+      // Generate a mock unique reference tracking token
+      const token = 'IOT-' + Math.floor(100000 + Math.random() * 900000);
+      document.getElementById('submissionId').textContent = token;
+
+      // Transition smoothly from form to confirmation view
+      form.style.display = 'none';
+      successCard.style.display = 'block';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    function resetToNewForm() {
+      form.reset();
+      document.getElementById('reviewDate').valueAsDate = new Date();
+      successCard.style.display = 'none';
+      form.style.display = 'block';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  </script>
 </body>
 </html>
