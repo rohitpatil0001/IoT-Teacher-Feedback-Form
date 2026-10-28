@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IoT Teacher Feedback Form</title>
+  <style>
+    :root {
+      --primary: #0f766e;
+      --primary-hover: #115e59;
+      --accent: #14b8a6;
+      --bg-surface: #ffffff;
+      --bg-body: #f1f5f9;
+      --text-main: #1e293b;
+      --text-muted: #64748b;
+      --border: #cbd5e1;
+      --radius: 8px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-body);
+      color: var(--text-main);
+      display: flex;
+      justify-content: center;
+      padding: 40px 16px;
+    }
+
+    .form-wrapper {
+      max-width: 680px;
+      width: 100%;
+      background: var(--bg-surface);
+      border-radius: var(--radius);
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+      border: 1px solid #e2e8f0;
+      overflow: hidden;
+    }
+
+    .header {
+      background: linear-gradient(135deg, #042f2e, #0f766e);
+      color: #ffffff;
+      padding: 32px 24px;
+      text-align: center;
+    }
+
+    .header h1 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+      letter-spacing: -0.02em;
+    }
+
+    .header p {
+      font-size: 0.95rem;
+      color: #ccfbf1;
+      line-height: 1.4;
+    }
+
+    form {
+      padding: 28px 24px;
+    }
+
+    .section-title {
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--primary);
+      border-bottom: 2px solid #e2e8f0;
+      padding-bottom: 8px;
+      margin-top: 24px;
+      margin-bottom: 18px;
+    }
+
+    .section-title:first-of-type {
+      margin-top: 0;
+    }
+
+    .field {
+      margin-bottom: 18px;
+    }
+
+    label {
+      display: block;
+      font-size: 0.9rem;
+      font-weight: 500;
+      margin-bottom: 6px;
+      color: var(--text-main);
+    }
+
+    .req {
+      color: #e11d48;
+      margin-left: 2px;
+    }
+
+    input[type="text"],
+    input[type="date"],
+    select,
+    textarea {
+      width: 100%;
+      padding: 10px 12px;
+      font-size: 0.95rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      outline: none;
+      background-color: #fff;
+      color: var(--text-main);
+      transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    input[type="text"]:focus,
+    input[type="date"]:focus,
+    select:focus,
+    textarea:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(20, 184, 166, 0.15);
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    .radio-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      padding-top: 4px;
+    }
+
+    .radio-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.9rem;
+      font-weight: normal;
+      cursor: pointer;
+      margin-bottom: 0;
+    }
+
+    .checkbox-field {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin: 24px 0 20px 0;
+      padding-top: 12px;
+      border-top: 1px solid #f1f5f9;
+    }
+
+    .checkbox-field input {
+      margin-top: 3px;
+    }
+
+    .button-group {
+      display: flex;
+      gap: 12px;
+      margin-top: 10px;
+    }
+
+    .btn {
+      flex: 1;
+      padding: 11px 16px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      border: none;
+      border-radius: var(--radius);
+      cursor: pointer;
+      transition: background-color 0.15s ease, opacity 0.15s ease;
+    }
+
+    .btn-submit {
+      background-color: var(--primary);
+      color: #ffffff;
+    }
+
+    .btn-submit:hover {
+      background-color: var(--primary-hover);
+    }
+
+    .btn-reset {
+      background-color: #f1f5f9;
+      color: var(--text-muted);
+      border: 1px solid var(--border);
+    }
+
+    .btn-reset:hover {
+      background-color: #e2e8f0;
+      color: var(--text-main);
+    }
+
+    .footer {
+      text-align: center;
+      padding: 16px;
+      background: #fafafa;
+      border-top: 1px solid #f1f5f9;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="form-wrapper">
+    <div class="header">
+      <h1>Teacher Feedback Form</h1>
+      <p>Internet of Things (IoT) Subject</p>
+      <p style="font-size: 0.85rem; opacity: 0.9; margin-top: 4px;">Your feedback helps improve teaching quality.</p>
+    </div>
+
+    <form>
+      <!-- Student Details -->
+      <h2 class="section-title">Student Details</h2>
+
+      <div class="field">
+        <label for="studentName">Student Name<span class="req">*</span></label>
+        <input type="text" id="studentName" placeholder="Enter your name" required>
+      </div>
+
+      <div class="field">
+        <label for="rollNumber">Roll Number<span class="req">*</span></label>
+        <input type="text" id="rollNumber" placeholder="Enter roll number" required>
+      </div>
+
+      <div class="field">
+        <label for="teacherName">Teacher's Name<span class="req">*</span></label>
+        <input type="text" id="teacherName" placeholder="Enter teacher's name" required>
+      </div>
+
+      <div class="field">
+        <label for="feedbackDate">Feedback Date<span class="req">*</span></label>
+        <input type="date" id="feedbackDate" required>
+      </div>
+
+      <!-- Teacher Evaluation -->
+      <h2 class="section-title">Teacher Evaluation</h2>
+
+      <div class="field">
+        <label for="q1">1. How clearly does the teacher explain IoT concepts?<span class="req">*</span></label>
+        <select id="q1" required>
+          <option value="" disabled selected>Select rating</option>
+          <option value="Excellent">Excellent</option>
+          <option value="Very Good">Very Good</option>
+          <option value="Good">Good</option>
+          <option value="Average">Average</option>
+          <option value="Poor">Poor</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="q2">2. How knowledgeable is the teacher about IoT?<span class="req">*</span></label>
+        <select id="q2" required>
+          <option value="" disabled selected>Select rating</option>
+          <option value="Excellent">Excellent</option>
+          <option value="Very Good">Very Good</option>
+          <option value="Good">Good</option>
+          <option value="Average">Average</option>
+          <option value="Poor">Poor</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>3. Does the teacher use practical examples?<span class="req">*</span></label>
+        <div class="radio-group">
+          <label class="radio-label"><input type="radio" name="practical" value="Always" required> Always</label>
+          <label class="radio-label"><input type="radio" name="practical" value="Often"> Often</label>
+          <label class="radio-label"><input type="radio" name="practical" value="Sometimes"> Sometimes</label>
+          <label class="radio-label"><input type="radio" name="practical" value="Rarely"> Rarely</label>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="q4">4. Is the teacher available to solve doubts?<span class="req">*</span></label>
+        <select id="q4" required>
+          <option value="" disabled selected>Select rating</option>
+          <option value="Always">Always</option>
+          <option value="Most of the time">Most of the time</option>
+          <option value="Sometimes">Sometimes</option>
+          <option value="Rarely">Rarely</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="q5">5. Rate the teacher's communication skills.<span class="req">*</span></label>
+        <select id="q5" required>
+          <option value="" disabled selected>Select rating</option>
+          <option value="Excellent">Excellent</option>
+          <option value="Very Good">Very Good</option>
+          <option value="Good">Good</option>
+          <option value="Average">Average</option>
+          <option value="Poor">Poor</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>6. Does the teacher encourage student participation?<span class="req">*</span></label>
+        <div class="radio-group">
+          <label class="radio-label"><input type="radio" name="participation" value="Yes" required> Yes</label>
+          <label class="radio-label"><input type="radio" name="participation" value="Sometimes"> Sometimes</label>
+          <label class="radio-label"><input type="radio" name="participation" value="No"> No</label>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="q7">7. Rate the IoT practical sessions.<span class="req">*</span></label>
+        <select id="q7" required>
+          <option value="" disabled selected>Select rating</option>
+          <option value="Excellent">Excellent</option>
+          <option value="Very Good">Very Good</option>
+          <option value="Good">Good</option>
+          <option value="Average">Average</option>
+          <option value="Poor">Poor</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>8. Is the teacher punctual and regular?<span class="req">*</span></label>
+        <div class="radio-group">
+          <label class="radio-label"><input type="radio" name="punctual" value="Always" required> Always</label>
+          <label class="radio-label"><input type="radio" name="punctual" value="Usually"> Usually</label>
+          <label class="radio-label"><input type="radio" name="punctual" value="Sometimes"> Sometimes</label>
+          <label class="radio-label"><input type="radio" name="punctual" value="Rarely"> Rarely</label>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>9. Does the teacher complete the syllabus on time?<span class="req">*</span></label>
+        <div class="radio-group">
+          <label class="radio-label"><input type="radio" name="syllabus" value="Yes" required> Yes</label>
+          <label class="radio-label"><input type="radio" name="syllabus" value="Partially"> Partially</label>
+          <label class="radio-label"><input type="radio" name="syllabus" value="No"> No</label>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>10. Overall teacher rating<span class="req">*</span></label>
+        <div class="radio-group">
+          <label class="radio-label"><input type="radio" name="overall" value="Excellent" required> Excellent</label>
+          <label class="radio-label"><input type="radio" name="overall" value="Very Good"> Very Good</label>
+          <label class="radio-label"><input type="radio" name="overall" value="Good"> Good</label>
+          <label class="radio-label"><input type="radio" name="overall" value="Average"> Average</label>
+          <label class="radio-label"><input type="radio" name="overall" value="Poor"> Poor</label>
+        </div>
+      </div>
+
+      <!-- Additional Feedback -->
+      <h2 class="section-title">Additional Feedback</h2>
+
+      <div class="field">
+        <label for="q11">11. What do you like most about the teacher's teaching?</label>
+        <textarea id="q11" placeholder="Share your thoughts..."></textarea>
+      </div>
+
+      <div class="field">
+        <label for="q12">12. What improvements would you suggest?</label>
+        <textarea id="q12" placeholder="Write your suggestions..."></textarea>
+      </div>
+
+      <div class="checkbox-field">
+        <input type="checkbox" id="confirm" required>
+        <label for="confirm" class="radio-label">I confirm that my feedback is honest and respectful.<span class="req">*</span></label>
+      </div>
+
+      <div class="button-group">
+        <button type="submit" class="btn btn-submit">Submit Feedback</button>
+        <button type="reset" class="btn btn-reset">Reset Form</button>
+      </div>
+    </form>
+
+    <div class="footer">
+      IoT Teacher Feedback System
+    </div>
+  </div>
+
+</body>
+</html>
